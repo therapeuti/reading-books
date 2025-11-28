@@ -168,23 +168,21 @@ export function CameraPage() {
     <div className="min-h-screen bg-gray-900 text-white">
       <Header title="📷 카메라로 책 읽기" showBack={true} />
 
+      {/* 비디오 요소 - 항상 DOM에 존재해야 함 */}
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        muted
+        id="video"
+        className={`w-full aspect-video object-cover bg-black ${cameraReady ? 'block' : 'hidden'}`}
+      />
+
       <main className="p-4">
         {!cameraReady ? (
           <Loading message="카메라 준비 중..." />
         ) : (
           <div className="space-y-4">
-            {/* 비디오 요소 */}
-            <div className="relative bg-black rounded-lg overflow-hidden">
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                muted
-                id="video"
-                className="w-full aspect-video object-cover"
-              />
-            </div>
-
             {/* 신뢰도 표시 */}
             {confidence > 0 && (
               <div className="bg-gray-800 p-4 rounded-lg">
